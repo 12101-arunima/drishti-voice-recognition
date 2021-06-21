@@ -1,0 +1,41 @@
+{% extends 'public/menu.html' %}
+{% block content %}
+
+<div class="container mt-10 p-3 mb-8 shadow bg-light rounded">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{url_for('static',filename='assets/img/gallery/hero.png')}}" height="500px" width="100%" alt="">
+        </div>
+        <div class="col-md-6 mt-5">
+            <h2 class="text-center text-primary">LOGIN</h2>
+            <form action="" id="form" method="post">
+                <div class="row form-group">
+                    <div class="col-md-12 m-2">
+                        <label for="uname">Username</label>
+                        <input type="text" name="uname" id="uname" placeholder="Username" required class="form-control">
+                    </div>
+                    <div class="col-md-12 m-2">
+                        <label for="pword">Password</label>
+                        <input type="password" name="pword" id="pword" placeholder="Password" required
+                            class="form-control">
+                    </div>
+                    <div id="msg" class="col-md-12 alert-danger">
+                        {% with msg = get_flashed_messages() %}
+                        {% if msg %}
+                        {{msg[0]}}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="col m-2" style="text-align: right;">
+                        <button class="btn btn-outline-success" type="submit">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{url_for('static',filename='assets/js/loginController.js')}}"></script>
+{% endblock  %}
