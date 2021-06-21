@@ -1,0 +1,81 @@
+{% extends 'admin/menu.html' %}
+{% block content %}
+
+<div class="container mt-9 mb-9 rounded shadow bg-light p-3">
+    <h2 class="text-center text-primary">USER DETAILS</h2>
+    <div class="row form-group mt-3">
+        <div class="col-md-3">
+            <img src="/static/uploads/{{data[6]}}" width="100%" alt="user image">
+        </div>
+        <div class="col-md-9">
+            <div class="row form-group">
+                <div class="col-md-10" style="text-align: right;font-weight: bold;">ID : {{data[0]}}</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    Name 
+                </div>
+                <div class="col-md-1"> : </div>
+                <div class="col-md-8">
+                    {{data[1]}}
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-3">
+                    Address 
+                </div>
+                <div class="col-md-1"> : </div>
+                <div class="col-md-8">
+                    {{data[2]}}
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-3">
+                    Date Of Birth 
+                </div>
+                <div class="col-md-1"> : </div>
+                <div class="col-md-8">
+                    {{data[4]}}
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-3">
+                    Gender 
+                </div>
+                <div class="col-md-1"> : </div>
+                <div class="col-md-8">
+                    {{data[5]}}
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-3">
+                    Phone 
+                </div>
+                <div class="col-md-1"> : </div>
+                <div class="col-md-8">
+                    {{data[3]}}
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-3">
+                    Email 
+                </div>
+                <div class="col-md-1"> : </div>
+                <div class="col-md-8">
+                    {{data[7]}}
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-3">
+                    Course 
+                </div>
+                <div class="col-md-1"> : </div>
+                <div class="col-md-8">
+                    {{data[8]}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
