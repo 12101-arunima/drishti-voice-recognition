@@ -1,0 +1,44 @@
+{% extends 'admin/menu.html' %}
+{% block content %}
+
+<div class="container mt-8 mb-9">
+    <div class="row form-group mb-5">
+        <div class="col">
+            <button class="btn btn-primary" onclick="location.href='/admin/addExam'">Add Exam</button>
+        </div>
+    </div>
+    {% if exams %}
+    <table class="table table-light table-striped">
+        <thead class="thead-primary">
+            <th>Sl.No</th>
+            <th>title</th>
+            <th>Course / Subject</th>
+            <th>Date / Time</th>
+            <th>Duration</th>
+            <th>Questions</th>
+            <th>Results</th>
+        </thead>
+        <tbody>
+            {% for e in exams %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{e[1]}}</td>
+                <td>{{e[6]}} - {{e[5]}}</td>
+                <td>{{e[2]}} - {{e[3]}}</td>
+                <td>{{e[4]}}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-info" onclick="location.href='/admin/viewQuestions/{{e[0]}}/'">View</button>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-outline-info" onclick="location.href='/admin/viewResults/{{e[0]}}/'">View</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h3 class="text-center text-danger">No Exams To Show</h3>
+    {% endif %}
+</div>
+
+{% endblock  %}
