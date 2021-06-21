@@ -1,0 +1,127 @@
+{% extends 'admin/menu.html' %}
+{% block content %}
+
+<div class="container mt-10 p-3 mb-8 shadow bg-light rounded w-50">
+    <h2 class="text-center text-primary">REGISTER USER</h2>
+    <br>
+    <form action="" id="reg_form" method="post" enctype="multipart/form-data">
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="fname">First Name</label>
+                <input type="text" name="fname" value="{{data['fname']}}" id="fname"
+                    placeholder="First Name" class="form-control" >
+            </div>
+            <div class="col-md-6">
+                <label for="lname">Last Name</label>
+                <input type="text" name="lname" value="{{data['lname']}}" id="lname"
+                    placeholder="Last Name" class="form-control" >
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label for="uname">Username</label>
+                <input type="text" name="uname" value="{{data['uname']}}" id="uname"
+                    placeholder="Username" class="form-control" >
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label for="address">Address</label>
+                <textarea name="address"  placeholder="Address" id="address" cols="30" rows="2"
+                    class="form-control">{{data['address']}}</textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="street">Street</label>
+                <input type="text" name="street" value="{{data['street']}}" minlength="3" id="street"
+                    placeholder="Street" class="form-control" >
+            </div>
+            <div class="col-md-6">
+                <label for="city">City</label>
+                <input type="text" name="city" value="{{data['city']}}" id="city" placeholder="City"
+                    class="form-control" >
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="state">State</label>
+                <input type="text" name="state" value="{{data['state']}}" id="state" placeholder="State"
+                    class="form-control" >
+            </div>
+            <div class="col-md-6">
+                <label for="pin">Pin Code</label>
+                <input type="text" name="pin" value="{{data['pin']}}" id="pin"
+                    placeholder="Pin Code" class="form-control" >
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="gender">Gender</label>
+                <br>
+                <input type="radio" checked name="gender" value="male">Male
+                <input type="radio" {% if data['gender']=='female' %} checked {% endif %} style="margin-left: 30%;"
+                    name="gender" value="female">Female
+            </div>
+            <div class="col-md-6">
+                <label for="dob">Date Of Birth</label>
+                <input type="date" value="{{data['dob']}}"  name="dob" id="dob" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="course">Select Course</label>
+            <select name="course" id="course"  class="form-control">
+                {% for c in courses %}
+                <option value="{{c[0]}}" {% if data['course']==c[0] %} selected {% endif %}>{{c[1]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" value="{{data['phone']}}"  placeholder="Phone Number"
+                    class="form-control" pattern="[7-9]{1}[0-9]{9}" name="phone">
+            </div>
+            <div class="col-md-6">
+                <label for="email">Email</label>
+                <input type="email" name="email" value="{{data['email']}}" id="email"  placeholder="Email"
+                    class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                <label for="photo">Photo</label>
+                <input type="file" name="photo"  id="photo"  class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="pword">Password</label>
+                <input type="password" id="pword" name="pword" placeholder="Password" class="form-control" >
+            </div>
+            <div class="col-md-6">
+                <label for="cpword">Confirm Password</label>
+                <input type="password" id="cpword" name="cpword" placeholder="Confirm Password" class="form-control"
+                    >
+            </div>
+        </div>
+        <div class="row form-group mt-2">
+            <div class="col-md-12 alert-danger">
+                {% with msg = get_flashed_messages() %}
+                {% if msg %}
+                {{msg[0]}}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="row form-group mt-3" style="text-align: right;">
+            <div class="col-md-12">
+                <button class="btn btn-outline-secondary" type="reset">Cancel</button>
+                <button class="btn btn-outline-success" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
