@@ -1,0 +1,168 @@
+{% extends 'admin/menu.html' %}
+{% block content %}
+
+<style>
+    .container {
+        counter-reset: cnt;
+    }
+
+    .qst::before {
+        counter-increment: cnt;
+        content: counter(cnt) ") ";
+        font-weight: bold;
+    }
+</style>
+
+<div class="container mt-8 mb-9">
+    <div class="row form-group mb-5">
+        <div class="col">
+            <button class="btn btn-primary" onclick="showHide()">Add Question</button>
+        </div>
+    </div>
+    <div id="main_div">
+        {% for q in questions %}
+        <div class="row form-group">
+            <div class="col-md-12 qst">
+                {{q[2]}}
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <ul>
+                    <li {% if q[7]==1 %}style="font-weight: bold;" {% endif %}>{{q[3]}}</li>
+                    <li {% if q[7]==2 %}style="font-weight: bold;" {% endif %}>{{q[4]}}</li>
+                    <li {% if q[7]==3 %}style="font-weight: bold;" {% endif %}>{{q[5]}}</li>
+                    <li {% if q[7]==4 %}style="font-weight: bold;" {% endif %}>{{q[6]}}</li>
+                </ul>
+            </div>
+            {% if dt %}
+            <div class="col-md-12" style="text-align: right;">
+                <button class="btn btn-outline-primary" onclick="showHide1({{q[0]}})">Edit</button>
+                <button class="btn btn-outline-danger"
+                    onclick="location.href='/admin/deleteQuestion/{{q[0]}}/{{q[1]}}/'">Delete</button>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div id="add_div" class="w-75 container bg-light rounded shadow p-3">
+        <h2 class="text-center text-primary">ADD QUESTION</h2>
+        <form action="" method="post">
+            <div class="row form-group mt-3">
+                <div class="col-md-12">
+                    <label for="question">Question</label>
+                    <textarea name="question" id="question" cols="30" rows="5" required
+                        placeholder="Enter Question Here" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt1">Option 1</label>
+                    <input type="text" id="opt1" name="opt1" required class="form-control" placeholder="Option 1">
+                </div>
+                <div class="col-md-2">
+                    <label for="answer">Answer</label>
+                    <br>
+                    <input type="radio" checked name="answer" value="1" class="mt-3" id="answer">
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt2">Option 2</label>
+                    <input type="text" id="opt2" name="opt2" required class="form-control" placeholder="Option 2">
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="answer" value="2" class="mt-5" id="answer">
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt3">Option 3</label>
+                    <input type="text" id="opt3" name="opt3" required class="form-control" placeholder="Option 3">
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="answer" value="3" class="mt-5" id="answer">
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt4">Option 4</label>
+                    <input type="text" id="opt4" name="opt4" required class="form-control" placeholder="Option 4">
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="answer" value="4" class="mt-5" id="answer">
+                </div>
+            </div>
+            <div class="row form-group mt-5">
+                <div class="col-md-12" style="text-align: right;">
+                    <button class="btn btn-outline-secondary" type="reset">Cancel</button>
+                    <button class="btn btn-outline-success" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="add_div1" class="w-75 container bg-light rounded shadow p-3">
+        <h2 class="text-center text-primary">Edit QUESTION</h2>
+        <form action="" id="edit_form" method="post">
+            <input type="hidden" name="qid" id="qid">
+            <div class="row form-group mt-3">
+                <div class="col-md-12">
+                    <label for="question">Question</label>
+                    <textarea name="question" id="e_question" cols="30" rows="5" required
+                        placeholder="Enter Question Here" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt1">Option 1</label>
+                    <input type="text" id="e_opt1" name="opt1" required class="form-control" placeholder="Option 1">
+                </div>
+                <div class="col-md-2">
+                    <label for="answer">Answer</label>
+                    <br>
+                    <input type="radio" name="answer" value="1" class="mt-3 ans" id="answer1">
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt2">Option 2</label>
+                    <input type="text" id="e_opt2" name="opt2" required class="form-control" placeholder="Option 2">
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="answer" value="2" class="mt-5 ans" id="answer2">
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt3">Option 3</label>
+                    <input type="text" id="e_opt3" name="opt3" required class="form-control" placeholder="Option 3">
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="answer" value="3" class="mt-5 ans" id="answer3">
+                </div>
+            </div>
+            <div class="row form-group mt-3">
+                <div class="col-md-10">
+                    <label for="opt4">Option 4</label>
+                    <input type="text" id="e_opt4" name="opt4" required class="form-control" placeholder="Option 4">
+                </div>
+                <div class="col-md-2">
+                    <input type="radio" name="answer" value="4" class="mt-5 ans" id="answer4">
+                </div>
+            </div>
+            <div class="row form-group mt-5">
+                <div class="col-md-12" style="text-align: right;">
+                    <button class="btn btn-outline-secondary" type="reset">Cancel</button>
+                    <button class="btn btn-outline-success" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('static',filename='assets/js/showHide.js')}}"></script>
+{% endblock %}
